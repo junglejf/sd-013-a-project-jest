@@ -15,12 +15,11 @@ describe('o retorno do telefonema', () => {
     const aloMae = await answerPhone('Oi');
     expect(typeof aloMae).not.toBe('number');
     expect(aloMae).toEqual('Oi!');
-    expect(aloMae.length).toEqual(3);
+    assert(aloMae.length, 3);
   });
   test('ocupado', async () => {
     try {
-      const aloTIM = await (answerPhone(0));
-      expect(aloTIm).toThrow(aloTIM);
+      (await (answerPhone(0))).toThrow(Error);
     } catch (erro) {
       expect(erro.message).toBe('Infelizmente não podemos atender...');
     }
