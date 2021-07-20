@@ -1,4 +1,6 @@
 const adventure = require('../src/setupTeardown');
+
+// jest.mock('../src/setupTeardown');
 /*
 Num universo não tão distante, um grupo de aventureiros da Trybe enfrentam uma série de testes.
 O grupo parte em direção ao sucesso, mas,
@@ -20,8 +22,20 @@ ATENÇÃO!!! Edite apenas este arquivo. Não altere os arquivos da pasta 'src'.
 */
 
 describe('quem sobreviveu?', () => {
-  // Adicione seu código aqui
+  // mockando somente a parte da função que remove 1 specialist
+  adventure.randomAttack = jest.fn(() => {
+    const randomSpecialistIndex = Math.floor(Math.random() * adventure.specialists.length);
+    adventure.specialists.splice(randomSpecialistIndex, 1);
+  });
 
+  const specialistsName = (specialists) => specialists.map((specialist) => specialist.nome);
+  let count = 1;
+  beforeEach(() => {
+    console.log(`Antes da ${count}ª aventura`, specialistsName(adventure.specialists));
+    adventure.randomAttack();
+    console.log(`Depois da ${count}ª aventura`, specialistsName(adventure.specialists));
+    count += 1;
+  });
   test('depois da primeira aventura', () => {
     expect(adventure.specialists.length).toBe(5);
   });
