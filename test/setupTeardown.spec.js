@@ -30,8 +30,8 @@ describe('quem sobreviveu?', () => {
 
   const specialistsName = (specialists) => specialists.map((specialist) => specialist.nome);
   let count = 1;
+  console.log(`Antes da ${count}ª aventura`, specialistsName(adventure.specialists));
   beforeEach(() => {
-    console.log(`Antes da ${count}ª aventura`, specialistsName(adventure.specialists));
     adventure.randomAttack();
     console.log(`Depois da ${count}ª aventura`, specialistsName(adventure.specialists));
     count += 1;
